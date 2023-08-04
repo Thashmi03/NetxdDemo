@@ -12,6 +12,7 @@ gti commit -m “mention the changes”
 git pull (to pull the file)
 
 incase conflict resolve it
+
 git push
 
 # git branching strategies
