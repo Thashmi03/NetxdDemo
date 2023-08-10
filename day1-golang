@@ -1,0 +1,329 @@
+steps
+link -https://www.geeksforgeeks.org/how-to-install-go-programming-language-in-linux/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+creating the environment and root
+sudo  rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf go1.20.7.linux-amd64.tar.gz
+$ sudo chown -R root:root /usr/local/go
+
+mkdir -p $HOME/go/{bin,src}-setting directory
+(working things will be in go src folder)
+mkdir-make directory to create
+
+$ nano ~/.profile
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
+
+save this by ctrl o and ctrl x to undo
+
+$ . ~/.profile
+$ echo $PATH
+$ go version
+--------------------------------
+to pass through the folder and create the file
+~$ cd go
+~/go$ ls
+bin  src
+thashmigaa@netxd-NUC11PAHi5:~/go$ cd src
+thashmigaa@netxd-NUC11PAHi5:~/go/src$ mkdir day1
+thashmigaa@netxd-NUC11PAHi5:~/go/src$ cd day1
+thashmigaa@netxd-NUC11PAHi5:~/go/src/day1$ mkdir helloworld
+thashmigaa@netxd-NUC11PAHi5:~/go/src/day1$ cd helloworld
+---------------------------------------
+. ~/.profile
+go mod init helloworld
+go: creating new go.mod: module helloworld
+(library imported will be displayed
+code .(to open visual studio)
+---------------------------------------
+to run the program
+go run helloworld.go
+-------------------------------------
+one entry point is main func
+for importing lib the keyword is import
+no semicolon
+***************************************************
+
+
+keywords
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+25 keywords
+
+if we create variable it must be utilised otherwise it will be error .this is to reduce the unwanted memory ans svaes memory.
+creating variable
+type1--var indentifier type   eg- var a int
+type2--var i int =10(both intialisation and declaration in same line with datatype)
+type3--var i =10(without datatype automaticallly typecasting)
+type4--short hand approach(:=) not mentioning the var keyword eg- a=10
+
+fmt.Printf("%T", name)
+printf with %T is going to give the datatype of the variable
+
+example
+#########
+package main
+
+import "fmt"
+
+func main() {
+	name := "thash"
+	age := 20
+	fmt.Printf("hello %T age is %T", name, age)
+}
+
+output:hello string age is int
+**************************************************
+wrapping the variable and then using it
+
+package main
+
+import "fmt"
+
+func main() {
+	var (
+		name   string
+		age    int
+		booked bool
+	)
+	name = "thash"
+	age = 20
+	booked = true
+	fmt.Println("hello", name, "age is", age, "train booked", booked)
+}
+output:hello thash age is 20 train booked true
+****************************************************
+print using format specifier 
+
+printf is used dor using the format specifier
+package main
+
+import "fmt"
+
+func main() {
+	var (
+		name   string
+		age    int
+		booked bool
+	)
+	name = "thash"
+	age = 20
+	booked = true
+	fmt.Printf("hello %s age is %d train booked %t", name, age, booked)
+}
+output:hello thash age is 20 train booked true
+
+**********************************************************************
+
+constants
+cannot be changed later
+*****************************************
+control statements
+can be declared and check the cond
+package main
+
+import "fmt"
+
+func main() {
+
+	if x := 25; x%5 == 0 {
+		fmt.Println("true")
+	}
+
+}
+ all those are same as in c
+ **************************
+ if and else in that else should start at the end of if bracket
+ package main
+
+import "fmt"
+
+func main() {
+
+	if x := 24; x%5 == 0 {
+		fmt.Println("true")
+	} else {
+		fmt.Println("false")
+	}
+}
+**********************************************
+in switch statement no need of break
+package main
+
+import "fmt"
+
+func main() {
+
+	var day = 1
+	switch day {
+	case 1:
+		fmt.Println("mon")
+	case 2:
+		fmt.Println("tue")
+	case 3:
+		fmt.Println("wed")
+	case 6:
+		fmt.Println("sat")
+		fmt.Println("hi")
+	}
+}
+******************************************************
+can be declared and check the cond
+package main
+
+import "fmt"
+
+func main() {
+
+	switch day := 3; day {
+	case 1:
+		fmt.Println("mon")
+	case 2:
+		fmt.Println("tue")
+	case 3:
+		fmt.Println("wed")
+	case 6:
+		fmt.Println("sat")
+		fmt.Println("hi")
+	default:
+		fmt.Println("wrong")
+	}
+}
+
+*****************************************************
+can be used conditions in switch
+package main
+
+import "fmt"
+
+func main() {
+	day := 3
+	switch {
+	case day < 2:
+		fmt.Println("mon")
+	case day > 1 && day < 3:
+		fmt.Println("tue")
+	case day > 2 && day < 4:
+		fmt.Println("wed")
+	case day > 3 && day < 6:
+		fmt.Println("sat")
+		fmt.Println("hi")
+	default:
+		fmt.Println("wrong")
+	}
+}
+***************************************************
+package main
+
+import "fmt"
+
+func main() {
+	for i := 1; i < 4; i++ {
+		fmt.Println(i)
+	}
+}
+************************************************
+func with many return values
+package main
+
+import "fmt"
+
+func getstock(pre, cur float64) (float64, float64) {
+//first float is for datatype of parameters and other 2 float represent the return type
+	change := cur - pre
+	percent := (change / pre) * 100
+	return change, percent //can return more values
+}
+func main() {
+	prev := 0.0
+	current := 100000.0
+	change, percent := getstock(prev, current)
+	//order of getting and returning shoulb be same .it receives by the order
+	fmt.Printf("%.2f %.2f", change, percent)
+}
+****************************************************
+with math lib
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+func getstock(pre, cur float64) (float64, float64) {
+	change := -cur + pre
+	percent := (change / pre) * 100
+	return change, percent
+}
+func main() {
+	prev := 0.0
+	current := 100000.0
+	change, _ := getstock(prev, current)
+	fmt.Printf("$%.2f", math.Abs(change))
+}
+*****************************************************
+error handling 
+
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+func op(num1, num2 int64) (int64, int64, error) {
+	sum := num1 + num2
+	diff := num1 - num2
+	if num1 == 0 || num2 == 0 {
+		err := errors.New("there is error")//this represents the error message
+		return sum, diff, err
+	} else {
+		return sum, diff, nil//if error is nil  then there is no error
+	}
+
+}
+func main() {
+	var num1 int64 = 30
+	var num2 int64 = 20
+	sum, diff, err := op(num1, num2)
+	if err != nil {
+		fmt.Println("error")
+	} else {
+		fmt.Println("sum = ", sum, "diff =", diff)
+	}
+}
+
+********************************************************
+concept of scope
+
+local -inside func
+global-outside func
+lexical or closure-func inside func and func can return another func
+
+create anaonymous func and can assign this func to variable
+lexical  access the outer func data
+
+
+
+after func completion 
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	x := sum(10, 20)
+	p := sum(10, 20)()
+	// outer func value changes but the inner func values always remain same
+	fmt.Printf(x())
+	fmt.Printf(p)
+}
+
+func sum(a, b int) func() int {
+	c := 10
+	return func() int {
+		return a + b + c // a,b and c is outside of func but it can use it
+	}
+}
+********************************************************
